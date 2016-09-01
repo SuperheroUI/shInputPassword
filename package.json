@@ -1,0 +1,57 @@
+{
+  "name": "sh-input-password",
+  "version": "0.1.0",
+  "description": "Password input box superhero theme",
+  "main": "./bin/sh-input-password.js",
+  "scripts": {
+    "clean": "rm -r ./bin",
+    "test": "./node_modules/.bin/karma start",
+    "build": "./node_modules/.bin/webpack -d --config webpack.config.js",
+    "dev": "./node_modules/.bin/webpack -d --watch --config webpack.config.js",
+    "example": "./node_modules/.bin/webpack -d --watch --config webpack.example.config.js",
+    "coveralls": "./node_modules/.bin/coveralls < ./bin/coverage/lcov/lcov.info"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SuperheroUI/shInputPassword"
+  },
+  "keywords": [
+    "password",
+    "input",
+    "field",
+    "superheroui",
+    "react",
+    "component"
+  ],
+  "author": "Kevin <kevinbatchelor@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "coveralls": "^2.11.12",
+    "css-loader": "^0.23.1",
+    "isparta-loader": "^2.0.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-webpack": "^1.8.0",
+    "node-sass": "^3.8.0",
+    "phantomjs": "^2.1.7",
+    "sass-loader": "^4.0.0",
+    "sh-form": "^0.1.4",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "lodash": "^4.14.1",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "sh-core": "^0.1.19"
+  }
+}

@@ -63,10 +63,10 @@ describe('root', function () {
             value = 1;
         };
         var root = TestUtils.renderIntoDocument(<ShInputPassword required value={what} onChange={changeMe}/>);
-        let rootNode = ReactDOM.findDOMNode(root);
         expect(root.state).toBeTruthy();
         let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-password-input');
-        expect(input.placeholder).toBe('Required Field');
+        expect(root.state.requiredField.showRequired).toBe(true);
+        expect(input.placeholder).toBe('+');
     });
 
     it('input styles be set to empty if there is no value', function () {
@@ -199,6 +199,38 @@ describe('root', function () {
         var root = TestUtils.renderIntoDocument(<ShInputPassword validator={validator} value={value} required />);
         root.validate(true);
         expect(root.state.classList.shTouched).toBe(true);
+    });
 
+
+    it('changing props should update state', function(){
+        let value = '0';
+        let validator = {
+            register: _.noop,
+            unregister: _.noop,
+        };
+        spyOn(validator, 'unregister');
+        var root = TestUtils.renderIntoDocument(<ShInputPassword validator={validator} value={value} required />);
+        root.validate(true);
+        var props = {
+            value: '0'
+        };
+        root.componentWillReceiveProps(props);
+        expect(root.state.value).toBe('0')
+    });
+
+    it('changing props should update state', function(){
+        let value = '1';
+        let validator = {
+            register: _.noop,
+            unregister: _.noop,
+        };
+        spyOn(validator, 'unregister');
+        var root = TestUtils.renderIntoDocument(<ShInputPassword validator={validator} value={value} required />);
+        root.validate(true);
+        var props = {
+            value: '0'
+        };
+        root.componentWillReceiveProps(props);
+        expect(root.state.value).toBe('0')
     });
 });

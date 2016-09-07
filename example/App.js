@@ -26,12 +26,16 @@ class App extends React.Component {
     }
 
     render() {
-        return <div>
-            <ShForm onSubmit={this.handleSubmit}>
+        return(
+        <div>
+            <form>
+                <input type="text" onChange={this.handleOneChange}/>
+            </form>
+            <div>
                 <ShInputPassword label="Password" required value={this.state.formData.one} onChange={this.handleOneChange} />
                 <button type="submit">go</button>
-            </ShForm>
-        </div>
+            </div>
+        </div>)
     }
 }
 

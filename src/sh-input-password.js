@@ -16,6 +16,7 @@ class ShInputPassword extends React.Component {
             },
             placeholderText: '+',
             validStatus: 'unknown',
+            requiredField: {showRequired: false}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -25,28 +26,27 @@ class ShInputPassword extends React.Component {
     }
 
     validate(onSubmit) {
+        var newState = _.clone(this.state);
+
         if (onSubmit) {
-            this.state.classList.shTouched = true;
+            newState.classList.shTouched = true;
         }
         let rtn = {isValid: true};
 
-        this.state.classList.shInvalid = false;
+        newState.classList.shInvalid = false;
 
         if (this.props.required && this.state.value.trim() === '') {
-            this.state.classList.shInvalid = true;
-
+            newState.classList.shInvalid = true;
             rtn.isValid = false;
             rtn.msg = 'Required';
         }
 
-        if (this.props.checkPassword(this.state.value)) {
-            this.state.classList.shInvalid = true;
-
+        if (this.props.checkPassword(newState.value)) {
+            newState.classList.shInvalid = true;
             rtn.isValid = false;
             rtn.msg = this.props.passwordMessage;
         }
 
-        var newState = _.clone(this.state);
         this.setState(newState);
         return rtn;
     };
@@ -74,10 +74,18 @@ class ShInputPassword extends React.Component {
         }
 
         if (this.props.required) {
-            this.state.placeholderText = 'Required Field';
-            this.setState(this.state);
+            this.setState({requiredField: {showRequired: true}});
         }
         this.state.placeholderHolder = this.state.placeholderText;
+    }
+
+    componentWillReceiveProps(props) {
+        if (!_.isUndefined(props.value) && !_.isEqual(props.value, this.state.value)) {
+            var newState = _.clone(this.state);
+            newState.classList.empty = !props.value;
+            newState.value = props.value;
+            this.setState(newState, this.validate);
+        }
     }
 
     handleChange(event) {
@@ -112,6 +120,7 @@ class ShInputPassword extends React.Component {
         var newState = _.clone(this.state);
         newState.placeholderText = newState.placeholderHolder;
         newState.classList.empty = !this.state.value;
+        newState.requiredField.showRequired = !this.state.value;
 
         this.setState(newState)
     }
@@ -132,6 +141,7 @@ class ShInputPassword extends React.Component {
                 className={this.props.className ? ShCore.getClassNames(this.state.classList) + ' ' + this.props.className : ShCore.getClassNames(this.state.classList)}>
                 <label>
                     <span className="label">{this.props.label}</span>
+                    <span className={"required-label " + ShCore.getClassNames(this.state.requiredField)}>required</span>
                     <input ref="input"
                            className="sh-password-input"
                            type="password"

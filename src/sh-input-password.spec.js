@@ -201,16 +201,13 @@ describe('root', function () {
         expect(root.state.classList.shTouched).toBe(true);
     });
 
-
     it('changing props should update state', function(){
         let value = '0';
         let validator = {
             register: _.noop,
             unregister: _.noop,
         };
-        spyOn(validator, 'unregister');
         var root = TestUtils.renderIntoDocument(<ShInputPassword validator={validator} value={value} required />);
-        root.validate(true);
         var props = {
             value: '0'
         };
@@ -224,9 +221,7 @@ describe('root', function () {
             register: _.noop,
             unregister: _.noop,
         };
-        spyOn(validator, 'unregister');
         var root = TestUtils.renderIntoDocument(<ShInputPassword validator={validator} value={value} required />);
-        root.validate(true);
         var props = {
             value: '0'
         };

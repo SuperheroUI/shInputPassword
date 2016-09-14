@@ -173,7 +173,7 @@ ShInputPassword.propTypes = {
 };
 
 ShInputPassword.defaultProps = {
-    value: null,
+    value: undefined,
     validator: null,
     onChange: _.noop,
     label: '',

@@ -45,12 +45,12 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                loader: "file?name=[name].[ext]"
+                loader: "file?name=[name].[ext]",
             },
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 loaders: ['style', 'css', 'sass']
-            }
-        ]
+            },
+        ],
     }
 };

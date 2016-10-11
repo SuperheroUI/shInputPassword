@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import ShInputPassword from '../bin/sh-input-password';
-import ShForm from 'sh-form';
+require('../node_modules/sh-core/bin/main.css');
 
 class App extends React.Component {
     constructor(props) {
